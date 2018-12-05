@@ -74,12 +74,14 @@ for i = 1 : length(X)
     PL2_distances(i) = distance_plex_L2;
 end
 
+% Sun-L2-PLEX angles.
 Sun_L2_Plex_Angles = [];
 for i = 1 : length(X)
     angle_sun_l2_plex = acos((EL2^2 + PL2_distances(i)^2 - PE_distances(i)^2) / (2 * EL2 * PL2_distances(i)));
     Sun_L2_Plex_Angles(i) = rad2deg(angle_sun_l2_plex);
 end
 
+% Distance between PLEX and Sun.
 PS_distances = [];
 for i = 1 : length(X)
     distance_plex_sun = sqrt(SL2^2 + PL2_distances(i)^2 - 2 * SL2 * PL2_distances(i) * cos(deg2rad(Sun_L2_Plex_Angles(i))));
@@ -87,6 +89,7 @@ for i = 1 : length(X)
 end
 
 %{
+% Sun-Earth-PLEX angles.
 Sun_Earth_Plex_Angles = [];
 for i = 1 : length(X)
     angles_sun_earth_plex = acos((AU^2 + PE_distances(i)^2 - PS_distances(i)^2) / (2 * AU * PE_distances(i)));
@@ -94,6 +97,7 @@ for i = 1 : length(X)
 end
 %}
 
+% Sun-PLEX-Earth angles.
 Sun_Plex_Earth_Angles = [];
 for i = 1 : length(X)
     angles_sun_plex_earth = acos((PS_distances(i)^2 + PE_distances(i)^2 - AU^2) / (2 * PS_distances(i) * PE_distances(i)));
